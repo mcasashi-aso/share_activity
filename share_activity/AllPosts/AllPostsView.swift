@@ -14,8 +14,10 @@ struct AllPostsView: View {
     
     var body: some View {
         List {
-            ForEach(model.datas.sorted(by: >)) { data in
-                Text(data.userName)
+            ForEach(model.posts.sorted(by: >)) { post in
+                NavigationLink(destination: PostView(post)) {
+                    PostCell(post)
+                }
             }
         }
     }

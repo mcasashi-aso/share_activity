@@ -26,10 +26,10 @@ struct ContentView: View {
                     AllPostsView()
                         .navigationBarTitle("All Posts")
                 }
-                .edgesIgnoringSafeArea(.all)
+                .edgesIgnoringSafeArea(.top)
                 .tabItem {
                     VStack {
-                        Image(systemName: "house")
+                        Image(systemName: "house.fill")
                         Text("All Posts")
                     }
                 }
@@ -40,7 +40,7 @@ struct ContentView: View {
                         .environmentObject(model)
                         .navigationBarTitle("Ranking")
                 }
-                .edgesIgnoringSafeArea(.all)
+                .edgesIgnoringSafeArea(.top)
                 .tabItem {
                     VStack {
                         Image(systemName: "list.number")
@@ -69,7 +69,7 @@ struct ContentView: View {
                         )
                     }
                     .padding(30)
-                .offset(x: 0, y: -44)
+                    .offset(x: 0, y: -54)
                     
                 }
             }

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		BA2DBFAD23B6D83500330D33 /* LinkImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2DBFAC23B6D83500330D33 /* LinkImage.swift */; };
 		BA2DBFAF23B6D9E300330D33 /* Image++.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2DBFAE23B6D9E300330D33 /* Image++.swift */; };
-		BA2DBFB123B6E9B200330D33 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2DBFB023B6E9B200330D33 /* Test.swift */; };
 		BA3EEFC823B5D8860090D3C3 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3EEFC723B5D8860090D3C3 /* Post.swift */; };
 		BA3EF00623B650780090D3C3 /* HealthDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3EF00523B650780090D3C3 /* HealthDataView.swift */; };
 		BA3EF00823B650F30090D3C3 /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3EF00723B650F30090D3C3 /* RankingView.swift */; };
@@ -24,6 +23,7 @@
 		BA5639AF23B4984800900B6A /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA5639AE23B4984800900B6A /* HealthKit.framework */; };
 		BA5639B123B499B000900B6A /* HealthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5639B023B499B000900B6A /* HealthController.swift */; };
 		BA5639B423B4F2F500900B6A /* Date++.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5639B323B4F2F500900B6A /* Date++.swift */; };
+		BA57972E23BB240A006775CE /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57972D23BB240A006775CE /* PostCell.swift */; };
 		BA5C6D6E23B65A28008A7E6E /* RankingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C6D6D23B65A28008A7E6E /* RankingCell.swift */; };
 		BA81A32523BA7998006C797C /* AllPostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA81A32423BA7998006C797C /* AllPostsView.swift */; };
 		BAD0990423B898B400DE4C82 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD0990323B898B400DE4C82 /* PostView.swift */; };
@@ -45,7 +45,6 @@
 		0DF03159116C77415FC5732F /* Pods-share_activity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-share_activity.debug.xcconfig"; path = "Target Support Files/Pods-share_activity/Pods-share_activity.debug.xcconfig"; sourceTree = "<group>"; };
 		BA2DBFAC23B6D83500330D33 /* LinkImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkImage.swift; sourceTree = "<group>"; };
 		BA2DBFAE23B6D9E300330D33 /* Image++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image++.swift"; sourceTree = "<group>"; };
-		BA2DBFB023B6E9B200330D33 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		BA3EEFC723B5D8860090D3C3 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		BA3EF00523B650780090D3C3 /* HealthDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthDataView.swift; sourceTree = "<group>"; };
 		BA3EF00723B650F30090D3C3 /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
@@ -63,6 +62,7 @@
 		BA5639AE23B4984800900B6A /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		BA5639B023B499B000900B6A /* HealthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthController.swift; sourceTree = "<group>"; };
 		BA5639B323B4F2F500900B6A /* Date++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date++.swift"; sourceTree = "<group>"; };
+		BA57972D23BB240A006775CE /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		BA5C6D6D23B65A28008A7E6E /* RankingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingCell.swift; sourceTree = "<group>"; };
 		BA81A32423BA7998006C797C /* AllPostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPostsView.swift; sourceTree = "<group>"; };
 		BAD0990323B898B400DE4C82 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 				BA56399A23B497F400900B6A /* ContentView.swift */,
 				BA2DBFAC23B6D83500330D33 /* LinkImage.swift */,
 				BAFE41F621DAEA0100A85C1E /*  Ranking */,
-				BA81A32423BA7998006C797C /* AllPostsView.swift */,
+				BA736FD223BB2BC6009AA62E /* AllPosts */,
 				BA3EF00523B650780090D3C3 /* HealthDataView.swift */,
 				BA43767023B4FC1F005E16EE /* ActivityRing.swift */,
 				BAD0990323B898B400DE4C82 /* PostView.swift */,
@@ -181,12 +181,20 @@
 			isa = PBXGroup;
 			children = (
 				BA5639AA23B4980F00900B6A /* Model.swift */,
-				BA2DBFB023B6E9B200330D33 /* Test.swift */,
 				BA5639B023B499B000900B6A /* HealthController.swift */,
 				BA3EEFC723B5D8860090D3C3 /* Post.swift */,
 				BAD8E65F23B52F1800211F77 /* HealthData.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		BA736FD223BB2BC6009AA62E /* AllPosts */ = {
+			isa = PBXGroup;
+			children = (
+				BA81A32423BA7998006C797C /* AllPostsView.swift */,
+				BA57972D23BB240A006775CE /* PostCell.swift */,
+			);
+			path = AllPosts;
 			sourceTree = "<group>";
 		};
 		BAD0990F23B89D4100DE4C82 /* UserDefaults++ */ = {
@@ -331,6 +339,7 @@
 				BA81A32523BA7998006C797C /* AllPostsView.swift in Sources */,
 				BA5639B423B4F2F500900B6A /* Date++.swift in Sources */,
 				BA3EF00623B650780090D3C3 /* HealthDataView.swift in Sources */,
+				BA57972E23BB240A006775CE /* PostCell.swift in Sources */,
 				BAD1B47623B5A420002DDD61 /* HKQuantityTypeIdentifier++.swift in Sources */,
 				BA5639B123B499B000900B6A /* HealthController.swift in Sources */,
 				BAD0990423B898B400DE4C82 /* PostView.swift in Sources */,
@@ -348,7 +357,6 @@
 				BA3EF00823B650F30090D3C3 /* RankingView.swift in Sources */,
 				BA5639AB23B4980F00900B6A /* Model.swift in Sources */,
 				BAD8E66023B52F1800211F77 /* HealthData.swift in Sources */,
-				BA2DBFB123B6E9B200330D33 /* Test.swift in Sources */,
 				BA2DBFAF23B6D9E300330D33 /* Image++.swift in Sources */,
 				BAD1B47423B593AF002DDD61 /* Tools.swift in Sources */,
 			);

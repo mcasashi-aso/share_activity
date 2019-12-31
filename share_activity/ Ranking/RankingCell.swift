@@ -7,36 +7,36 @@
 //
 
 import SwiftUI
+import HealthKit
 
 struct RankingCell: View {
     
     var count: Int
+    var identifier: HKQuantityTypeIdentifier
     var rank: Int
-    var postData: Post
+    var post: Post
     
-    init(_ post: Post, rank: Int, count: Int) {
-        self.postData = post
+    init(_ post: Post, type: HKQuantityTypeIdentifier, rank: Int, count: Int) {
+        self.post = post
+        self.identifier = type
         self.rank = rank
         self.count = count
     }
     
     var body: some View {
-        HStack {
+        let data = post.datas.first { $0.identifier == identifier }
+        
+        return HStack {
             Text("\(String(format: "%\(Int(floor(log(Double(count)))))d", rank))位")
                 .multilineTextAlignment(.leading)
                 .font(.title)
-            Text(postData.userName).font(.title)
+            Text(post.userName).font(.title)
             Spacer()
-            LinkImage(URL(string: postData.imageURL)) {
-                ActivityRing(nil)
-            }
-        .frame(width: 60, height: 60)
+            
+            Text((data?.value).map(Int.init)?.description ?? "--")
+            Text(data?.unit.unitString ?? "")
         }
         .padding(15)
-        //            .background(
-        //                RoundedRectangle(cornerRadius: 25, style: .continuous)
-        //                    .fill(Color.black)
-        //            )
     }
 }
 
@@ -44,7 +44,7 @@ struct PostRow_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             RankingCell(
-                testPost, rank: 5, count: 20
+                testPost, type: .activeEnergyBurned, rank: 5, count: 20
             )
         }
         .previewLayout(.fixed(width: 375, height: 130))

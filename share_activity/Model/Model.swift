@@ -33,7 +33,7 @@ final class Model: ObservableObject {
     @UserDefault(.userName, defaultValue: "user name")
     var userName: String
     
-    @Published var datas = [Post]()
+    @Published var posts = [Post]()
     
     init() {
         
@@ -99,7 +99,7 @@ final class Model: ObservableObject {
             do {
                 let result = try self.decoder.decode([Post].self, from: data)
                 DispatchQueue.main.async {
-                    self.datas = result
+                    self.posts = result
                 }
             } catch let error {
                 print("decode error", error)

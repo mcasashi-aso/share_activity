@@ -20,7 +20,7 @@ struct RankingView: View {
     var body: some View {
         
         // それなりに投稿増えたら、その日のランキングにしてもいいかもしれない
-        let sorted = model.datas.sorted { l, r in
+        let sorted = model.posts.sorted { l, r in
             if let ld = l.datas.first(where: { $0.identifier == self.sortBy }),
                 let rd = r.datas.first(where: { $0.identifier == self.sortBy }) {
                 return (ld < rd) ?? false
@@ -30,7 +30,8 @@ struct RankingView: View {
             ForEach(sorted) { post in
                 NavigationLink(destination: PostView(post)) { () -> RankingCell in  
                     let rank = sorted.firstIndex { $0 == post } ?? 0
-                    return RankingCell(post, rank: rank + 1, count: sorted.count)
+                    return RankingCell(post, type: self.sortBy,
+                                       rank: rank + 1, count: sorted.count)
                 }
             }
         }

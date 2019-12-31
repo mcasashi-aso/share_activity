@@ -1,14 +1,14 @@
 //
-//  PostView.swift
+//  PostCell.swift
 //  share_activity
 //
-//  Created by Masashi Aso on 2019/12/29.
+//  Created by Masashi Aso on 2019/12/31.
 //  Copyright © 2019 Masashi Aso. All rights reserved.
 //
 
 import SwiftUI
 
-struct PostView: View {
+struct PostCell: View {
     
     var post: Post
     
@@ -17,24 +17,22 @@ struct PostView: View {
     }
     
     var body: some View {
-        ScrollView {
+        HStack {
+            
+            Text(post.userName)
+            
+            Spacer()
             
             LinkImage(URL(string: post.imageURL)) {
                 ActivityRing(nil)
             }
-            .frame(width: 300, height: 300)
-            
-            HealthDataView(datas: post.datas)
-            
-            Spacer()
-                .frame(height: 90)
+            .frame(width: 60, height: 60)
         }
-        .navigationBarTitle(post.userName)
     }
 }
 
-struct PostView_Previews: PreviewProvider {
+struct PostCell_Previews: PreviewProvider {
     static var previews: some View {
-        PostView(testPost)
+        PostCell(testPost)
     }
 }
