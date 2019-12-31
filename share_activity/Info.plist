@@ -62,5 +62,7 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Dark</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>テスト！！！！</string>
 </dict>
 </plist>

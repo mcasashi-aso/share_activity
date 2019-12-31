@@ -11,6 +11,9 @@ import HealthKit
 import HealthKitUI
 import SwiftUI
 
+#warning("cameraのアクセス権消す")
+
+
 struct ContentView: View {
     
     @EnvironmentObject var model: Model
@@ -78,6 +81,7 @@ struct ContentView: View {
                 ComposeView()
                     .environmentObject(self.model)
         }
+        .onAppear { self.model.healthController.loadDatas() }
     }
 }
 

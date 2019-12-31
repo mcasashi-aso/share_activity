@@ -50,7 +50,7 @@ struct RankingView: View {
                     Alert.Button.default(
                         {
                             if id == self.sortBy {
-                                return Text("☑️ " + id.text)
+                                return Text("☑️ " + id.text + " 　")
                             } else {
                                 return Text(id.text)
                             }

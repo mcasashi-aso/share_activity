@@ -9,8 +9,8 @@
 import Foundation
 
 extension Date {
-    static func startOfToday(calendar: Calendar = .current) -> Date? {
+    static func startOfToday(calendar: Calendar = .current) -> Date {
         let components = calendar.dateComponents([.year, .month, .day], from: Date())
-        return calendar.date(from: components)
+        return calendar.date(from: components)!
     }
 }

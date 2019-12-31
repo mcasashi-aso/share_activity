@@ -18,6 +18,7 @@ class HealthController: ObservableObject {
     private init() {
         askAllowHealth() { success in 
             self.setup()
+            self.loadSummary()
         }
     }
     
@@ -46,7 +47,7 @@ class HealthController: ObservableObject {
     ]
     @Published var datas = [HealthData]()
     
-    var summary = HKActivitySummary()
+    var summary: HKActivitySummary?
     
     
     
@@ -83,6 +84,25 @@ class HealthController: ObservableObject {
             }
             healthStore.execute(query)
         }
+    }
+    
+    func loadSummary() {
+        let calendar = Calendar.current
+        let components: Set<Calendar.Component> = [.day, .month, .year, .era]
+        let start = calendar.date(byAdding: .day, value: -7, to: Date.startOfToday())
+        var startDateComponents = calendar.dateComponents(components, from: start!)
+        startDateComponents.calendar = calendar
+        var endDateComponents = calendar.dateComponents(components, from: Date())
+        endDateComponents.calendar = calendar
+        
+        let predicate = HKQuery.predicate(
+            forActivitySummariesBetweenStart: startDateComponents, end: endDateComponents)
+        let query = HKActivitySummaryQuery(predicate: predicate) { (query, summaries, error) in
+            if let error = error { print(error) }
+            print(summaries ?? [])
+            self.summary = summaries?.first
+        }
+        healthStore.execute(query)
     }
     
     func askAllowHealth(completion: @escaping (Bool) -> Void) {

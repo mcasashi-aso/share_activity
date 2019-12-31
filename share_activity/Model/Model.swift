@@ -39,8 +39,17 @@ final class Model: ObservableObject {
         
     }
     
+    private var isLoading = false
+    
     func post() {
         let imageData = getRingImageData(summary: healthController.summary)
+        
+        // test
+        if let data = imageData,
+            let uiImage = UIImage(data: data) {
+            UIImageWriteToSavedPhotosAlbum(uiImage, nil, nil, nil)
+        }
+        
         if let data = imageData {
             // cloudinary
             let config = CLDConfiguration(cloudName: "share-activity", apiKey: "996111713874317", apiSecret: "4nzRg-sEBh8TH1aEhM-d3QL0KPA")
@@ -48,16 +57,18 @@ final class Model: ObservableObject {
             let params = CLDUploadRequestParams()
                 .setParam("newID", value: nil)
             
-            let request = cloudinary.createUploader().upload(data: data, uploadPreset: "", params: nil, progress: nil) { (result, error) in
-                guard let result = result, error != nil else { print(error!); return }
-                
-                if let url = result.url {
-                    self.postToHeroku(imageURL: url)
+            let request = cloudinary.createUploader()
+                .upload(data: data, uploadPreset: "", params: nil, progress: nil) { (result, error) in
+                    guard let result = result, error != nil else { print(error!); return }
+                    
+                    if let url = result.url {
+                        self.postToHeroku(imageURL: url)
+                    }
+//                    self.postToHeroku(imageURL: result.url ?? "")
                 }
-//                self.postToHeroku(imageURL: result.url ?? "")
-            }
         } else {
-            postToHeroku(imageURL: "")
+            print("dont exit image data")
+//            postToHeroku(imageURL: "")
         }
     }
     
@@ -83,18 +94,22 @@ final class Model: ObservableObject {
         }
     }
     
-    private func getRingImageData(summary: HKActivitySummary) -> Data? {
+    private func getRingImageData(summary: HKActivitySummary?) -> Data? {
         let ringView = HKActivityRingView()
         ringView.bounds = CGRect(x: 0, y: 0, width: 300, height: 300)
-        ringView.activitySummary = healthController.summary
+        ringView.setActivitySummary(summary, animated: false)
         return ringView.getImageData()
     }
     
     @objc func fetchDatas() {
+        guard !isLoading else { return }
+        print("year")
+        isLoading = true
         let url = baseURL.appendingPathComponent("ranking")
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         URLSession.shared.dataTask(with: request) { (data, response, error) in
+            self.isLoading = false
             guard let data = data, error == nil else { print("URL session error", error!); return }
             do {
                 let result = try self.decoder.decode([Post].self, from: data)
@@ -107,4 +122,5 @@ final class Model: ObservableObject {
             
         }.resume()
     }
+
 }

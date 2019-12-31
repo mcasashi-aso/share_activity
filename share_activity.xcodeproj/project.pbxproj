@@ -13,6 +13,7 @@
 		BA3EF00623B650780090D3C3 /* HealthDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3EF00523B650780090D3C3 /* HealthDataView.swift */; };
 		BA3EF00823B650F30090D3C3 /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3EF00723B650F30090D3C3 /* RankingView.swift */; };
 		BA43767123B4FC1F005E16EE /* ActivityRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA43767023B4FC1F005E16EE /* ActivityRing.swift */; };
+		BA4D1E1023BB992900CE24E4 /* Ring.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4D1E0F23BB992900CE24E4 /* Ring.swift */; };
 		BA56399723B497F400900B6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA56399623B497F400900B6A /* AppDelegate.swift */; };
 		BA56399923B497F400900B6A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA56399823B497F400900B6A /* SceneDelegate.swift */; };
 		BA56399B23B497F400900B6A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA56399A23B497F400900B6A /* ContentView.swift */; };
@@ -49,6 +50,7 @@
 		BA3EF00523B650780090D3C3 /* HealthDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthDataView.swift; sourceTree = "<group>"; };
 		BA3EF00723B650F30090D3C3 /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
 		BA43767023B4FC1F005E16EE /* ActivityRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRing.swift; sourceTree = "<group>"; };
+		BA4D1E0F23BB992900CE24E4 /* Ring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ring.swift; sourceTree = "<group>"; };
 		BA56399323B497F400900B6A /* share_activity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = share_activity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA56399623B497F400900B6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA56399823B497F400900B6A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,14 +130,13 @@
 				BA56399623B497F400900B6A /* AppDelegate.swift */,
 				BA56399823B497F400900B6A /* SceneDelegate.swift */,
 				BA56399A23B497F400900B6A /* ContentView.swift */,
-				BA2DBFAC23B6D83500330D33 /* LinkImage.swift */,
 				BAFE41F621DAEA0100A85C1E /*  Ranking */,
 				BA736FD223BB2BC6009AA62E /* AllPosts */,
 				BA3EF00523B650780090D3C3 /* HealthDataView.swift */,
-				BA43767023B4FC1F005E16EE /* ActivityRing.swift */,
 				BAD0990323B898B400DE4C82 /* PostView.swift */,
 				BAD0990523B89B5100DE4C82 /* ComposeView.swift */,
 				BA5639B723B4F56D00900B6A /* Model */,
+				BAA3437E23BB3048007C2BBB /* Components */,
 				BA5639B223B4F2E800900B6A /* Extensions */,
 				BA56399C23B497F700900B6A /* Assets.xcassets */,
 				BA5639A123B497F700900B6A /* LaunchScreen.storyboard */,
@@ -195,6 +196,16 @@
 				BA57972D23BB240A006775CE /* PostCell.swift */,
 			);
 			path = AllPosts;
+			sourceTree = "<group>";
+		};
+		BAA3437E23BB3048007C2BBB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				BA2DBFAC23B6D83500330D33 /* LinkImage.swift */,
+				BA43767023B4FC1F005E16EE /* ActivityRing.swift */,
+				BA4D1E0F23BB992900CE24E4 /* Ring.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		BAD0990F23B89D4100DE4C82 /* UserDefaults++ */ = {
@@ -341,6 +352,7 @@
 				BA3EF00623B650780090D3C3 /* HealthDataView.swift in Sources */,
 				BA57972E23BB240A006775CE /* PostCell.swift in Sources */,
 				BAD1B47623B5A420002DDD61 /* HKQuantityTypeIdentifier++.swift in Sources */,
+				BA4D1E1023BB992900CE24E4 /* Ring.swift in Sources */,
 				BA5639B123B499B000900B6A /* HealthController.swift in Sources */,
 				BAD0990423B898B400DE4C82 /* PostView.swift in Sources */,
 				BA5C6D6E23B65A28008A7E6E /* RankingCell.swift in Sources */,

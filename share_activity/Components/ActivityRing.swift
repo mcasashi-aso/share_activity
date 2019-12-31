@@ -18,8 +18,10 @@ struct ActivityRing: UIViewRepresentable {
         self.summary = summary
     }
     
+    private var ringView = HKActivityRingView()
+    
     func makeUIView(context: Context) -> HKActivityRingView {
-        HKActivityRingView()
+        return ringView
     }
     
     func updateUIView(_ ringView: HKActivityRingView, context: Context) {
