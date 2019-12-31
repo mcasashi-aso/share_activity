@@ -16,43 +16,46 @@ class HealthController: ObservableObject {
     // MARK: - Singleton
     static let shared = HealthController()
     private init() {
-        self.allDatas = [
-            HealthData(.activeEnergyBurned,     unit: .kilocalorie()),
-            HealthData(.appleExerciseTime,      unit: .minute()),
-            HealthData(.appleStandTime,         unit: .minute()),
-            HealthData(.distanceWalkingRunning, unit: .meter()),
-            HealthData(.stepCount,              unit: .count()),
-            HealthData(.flightsClimbed,         unit: .count())
-        ]
-        
-        askAllowHealth()
-        allDatas.forEach { data in
-            checkAuthorization(of: data) { success in
-                if success {
-                    self.datas.append(data)
-                }
+        askAllowHealth() { success in 
+            self.setup()
+        }
+    }
+    
+    func setup() {
+        self.datas = []
+        allTypes.forEach { identifier, unit in
+            checkAuthorization(of: identifier) { success in
+                guard success else { return }
+                let data = HealthData(identifier, value: 0, unit: unit)
+                self.datas.append(data)
             }
         }
-        
-        let timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            self.loadDatas()
-        }
-        timer.fire()
+        loadDatas()
     }
     
     private var healthStore = HKHealthStore()
     
     // MARK: -
-    var allDatas = [HealthData]()
+    var allTypes: [(HKQuantityTypeIdentifier, HKUnit)] = [
+        (.activeEnergyBurned,     .kilocalorie()),
+        (.appleExerciseTime,      .minute()),
+        (.appleStandTime,         .minute()),
+        (.distanceWalkingRunning, .meter()),
+        (.stepCount,              .count()),
+        (.flightsClimbed,         .count())
+    ]
     @Published var datas = [HealthData]()
     
     var summary = HKActivitySummary()
     
     
     
-    private func checkAuthorization(of healthType: HealthData, completion: @escaping (Bool) -> Void) {
+    private func checkAuthorization(
+        of typeIdentifier: HKQuantityTypeIdentifier,
+        completion: @escaping (Bool) -> Void
+    ) {
         guard HKHealthStore.isHealthDataAvailable(),
-            let type = HKObjectType.quantityType(forIdentifier: healthType.identifier) else {
+            let type = HKObjectType.quantityType(forIdentifier: typeIdentifier) else {
             completion(false)
             return
         }
@@ -82,11 +85,18 @@ class HealthController: ObservableObject {
         }
     }
     
-    func askAllowHealth() {
-        let read: [HKObjectType] = allDatas.map {
-            HKQuantityType.quantityType(forIdentifier: $0.identifier)
-        }.compactMap { $0 }.map { $0 as HKObjectType }
-        HKHealthStore().requestAuthorization(toShare: nil, read: Set(read)) { s, e in }
+    func askAllowHealth(completion: @escaping (Bool) -> Void) {
+        let read: [HKObjectType] = allTypes
+            .map { id, _ in HKQuantityType.quantityType(forIdentifier: id) }
+            .compactMap { $0 }
+            .map { $0 as HKObjectType }
+        HKHealthStore().requestAuthorization(toShare: nil, read: Set(read)) { success, error in
+            if success {
+                completion(success)
+            } else if let error = error {
+                print(error)
+            }
+        }
     }
     
 }

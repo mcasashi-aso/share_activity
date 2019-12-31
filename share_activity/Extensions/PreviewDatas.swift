@@ -10,14 +10,6 @@ import Foundation
 
 
 internal let testPost = Post(userName: "Andy", imageURL: "apple.com", datas: [
-    {
-        var data = HealthData(.activeEnergyBurned, unit: .kilocalorie())
-        data.value = 200
-        return data
-    }(),
-    {
-        var data = HealthData(.appleStandTime, unit: .count())
-        data.value = 7
-        return data
-    }()
+    HealthData(.activeEnergyBurned, value: 200, unit: .kilocalorie()),
+    HealthData(.appleStandTime, value: 7, unit: .count())
 ], date: Date())

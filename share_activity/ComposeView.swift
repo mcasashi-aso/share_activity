@@ -43,6 +43,7 @@ struct ComposeView: View {
                 }.disabled(model.userName.isEmpty)
             )
         }
+        .onAppear { self.model.healthController.loadDatas() }
     }
 }
 

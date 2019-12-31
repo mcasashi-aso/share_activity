@@ -9,20 +9,34 @@
 import Foundation
 import HealthKit
 
+protocol HealthType {
+    static var identifier: HKQuantityTypeIdentifier { get }
+    static var unit: HKUnit { get }
+}
+
+struct ActiveEnergyBurnedType: HealthType {
+    static var identifier: HKQuantityTypeIdentifier = .activeEnergyBurned
+    static var unit: HKUnit = .kilocalorie()
+}
+
+
+
+
 struct HealthData: Identifiable {
     
     var id: String {
-        "\(identifier.rawValue) - \(value?.description ?? "unavailable")"
+        "\(identifier.rawValue) - \(value)"
     }
     
     let identifier: HKQuantityTypeIdentifier
     let unit: HKUnit
     
-    var value: Double?
+    var value: Double
     
-    init(_ identifier: HKQuantityTypeIdentifier, unit: HKUnit) {
+    init(_ identifier: HKQuantityTypeIdentifier, value: Double, unit: HKUnit) {
         self.identifier = identifier
         self.unit = unit
+        self.value = value
     }
 }
 
@@ -61,3 +75,28 @@ extension HealthData: Codable {
     }
     
 }
+
+
+extension HealthData: Equatable {
+    
+    static func <(l: Self, r: Self) -> Bool? {
+        guard l.identifier == r.identifier,
+            l.unit == r.unit else { return nil }
+        return l.value < r.value
+    }
+    
+    static func >=(l: Self, r: Self) -> Bool? {
+        return (l < r).map { !$0 }
+    }
+    
+    static func >(l: Self, r: Self) -> Bool? {
+        guard l.identifier == r.identifier,
+            l.unit == r.unit else { return nil }
+        return l.value > r.value
+    }
+    
+    static func <=(l: Self, r: Self) -> Bool? {
+        return (l > r).map { !$0 }
+    }
+}
+

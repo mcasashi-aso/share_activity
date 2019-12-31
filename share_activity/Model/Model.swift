@@ -33,17 +33,17 @@ final class Model: ObservableObject {
     @UserDefault(.userName, defaultValue: "user name")
     var userName: String
     
-    @Published var rankingData = [Post]()
+    @Published var datas = [Post]()
     
     init() {
-        fetchRanking()
+        
     }
     
     func post() {
         let imageData = getRingImageData(summary: healthController.summary)
         if let data = imageData {
             // cloudinary
-            let config = CLDConfiguration(cloudName: "share-activity")
+            let config = CLDConfiguration(cloudName: "share-activity", apiKey: "996111713874317", apiSecret: "4nzRg-sEBh8TH1aEhM-d3QL0KPA")
             let cloudinary = CLDCloudinary(configuration: config)
             let params = CLDUploadRequestParams()
                 .setParam("newID", value: nil)
@@ -51,13 +51,14 @@ final class Model: ObservableObject {
             let request = cloudinary.createUploader().upload(data: data, uploadPreset: "", params: nil, progress: nil) { (result, error) in
                 guard let result = result, error != nil else { print(error!); return }
                 
-                self.postToHeroku(imageURL: result.url ?? "")
+                if let url = result.url {
+                    self.postToHeroku(imageURL: url)
+                }
+//                self.postToHeroku(imageURL: result.url ?? "")
             }
         } else {
             postToHeroku(imageURL: "")
         }
-        
-        
     }
     
     private func postToHeroku(imageURL: String) {
@@ -75,7 +76,7 @@ final class Model: ObservableObject {
             
             URLSession.shared.dataTask(with: request) { _,_,error in
                 error.map { print($0) }
-                self.fetchRanking()
+                self.fetchDatas()
             }.resume()
         } catch let error {
             print(error)
@@ -89,7 +90,7 @@ final class Model: ObservableObject {
         return ringView.getImageData()
     }
     
-    @objc func fetchRanking() {
+    @objc func fetchDatas() {
         let url = baseURL.appendingPathComponent("ranking")
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -98,7 +99,7 @@ final class Model: ObservableObject {
             do {
                 let result = try self.decoder.decode([Post].self, from: data)
                 DispatchQueue.main.async {
-                    self.rankingData = result
+                    self.datas = result
                 }
             } catch let error {
                 print("decode error", error)

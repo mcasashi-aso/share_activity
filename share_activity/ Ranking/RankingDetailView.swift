@@ -23,7 +23,7 @@ struct RankingDetailView: View {
                     HStack {
                         Text(d.identifier.description)
                         Spacer()
-                        Text("\(d.value.map(Int.init)?.description ?? "--")\(d.unit.unitString)")
+                        Text("\(Int(d.value))\(d.unit.unitString)")
                     }
                 }
             }

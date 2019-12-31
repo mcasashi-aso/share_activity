@@ -22,8 +22,13 @@ struct Post: Codable, Identifiable {
         case date
     }
     
-    var id: String {
-        "\(userName) - \(date.description)"
-    }
+    var id: String { "\(date.description) - \(imageURL)" }
     
+}
+
+
+extension Post: Comparable {
+    static func < (lhs: Post, rhs: Post) -> Bool {
+        lhs.date < rhs.date
+    }
 }

@@ -15,13 +15,14 @@ struct LinkImage<Placeholder>: View where Placeholder: View {
     var placeholder: Placeholder
     
     var body: some View {
-        Group {
-            if loader.data != nil {
-                Image(data: loader.data!)?
+        let image = loader.data.flatMap { Image(data: $0) }
+        return Group {
+            if image != nil {
+                image!
                     .renderingMode(.original)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-            }else {
+            } else {
                 placeholder
             }
         }

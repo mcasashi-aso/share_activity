@@ -14,25 +14,69 @@ import SwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var model: Model
+    @State var sheetIsPresented = false
     
     var body: some View {
-        TabView {
+        
+        ZStack {
             
-            NavigationView {
-                RankingView()
-                    .environmentObject(model)
-                    .navigationBarTitle("Ranking")
-            }
-            .edgesIgnoringSafeArea(.all)
-            .tabItem {
-                VStack {
-                    Image(systemName: "list.number")
-                    Text("Ranking")
+            TabView {
+                
+                NavigationView {
+                    AllPostsView()
+                        .navigationBarTitle("All Posts")
                 }
-            }.onAppear { self.model.fetchRanking() }
+                .edgesIgnoringSafeArea(.all)
+                .tabItem {
+                    VStack {
+                        Image(systemName: "house")
+                        Text("All Posts")
+                    }
+                }
+                .onAppear { self.model.fetchDatas() }
+                
+                NavigationView {
+                    RankingView()
+                        .environmentObject(model)
+                        .navigationBarTitle("Ranking")
+                }
+                .edgesIgnoringSafeArea(.all)
+                .tabItem {
+                    VStack {
+                        Image(systemName: "list.number")
+                        Text("Ranking")
+                    }
+                }
+                .onAppear { self.model.fetchDatas() }
+            }
             
-            Text("fdf")
-            
+            // FIXME: GeometryReader使うべき
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        self.sheetIsPresented.toggle()
+                    }) {
+                        Image(systemName: "pencil")
+                            .resizable()
+                            .foregroundColor(.white)
+                            .frame(width: 30, height: 30)
+                            .background(
+                                Circle()
+                                    .fill(Color.blue)
+                                    .frame(width: 60, height: 60)
+                        )
+                    }
+                    .padding(30)
+                .offset(x: 0, y: -44)
+                    
+                }
+            }
+        }
+        .sheet(isPresented: $sheetIsPresented) {
+                ComposeView()
+                    .environmentObject(self.model)
         }
     }
 }

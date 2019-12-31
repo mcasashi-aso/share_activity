@@ -14,9 +14,9 @@ struct RankingCell: View {
     var rank: Int
     var postData: Post
     
-    init(rank: Int, data: Post, count: Int) {
+    init(_ post: Post, rank: Int, count: Int) {
+        self.postData = post
         self.rank = rank
-        self.postData = data
         self.count = count
     }
     
@@ -28,8 +28,9 @@ struct RankingCell: View {
             Text(postData.userName).font(.title)
             Spacer()
             LinkImage(URL(string: postData.imageURL)) {
-                Image(systemName: "smallcircle.circle")
+                ActivityRing(nil)
             }
+        .frame(width: 60, height: 60)
         }
         .padding(15)
         //            .background(
@@ -43,7 +44,7 @@ struct PostRow_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             RankingCell(
-                rank: 15, data: testPost, count: 20
+                testPost, rank: 5, count: 20
             )
         }
         .previewLayout(.fixed(width: 375, height: 130))
